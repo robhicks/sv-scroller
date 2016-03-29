@@ -13,6 +13,7 @@ angular.module('App', ['sv-scroller'])
   }
 
   this.scrollToElement = function(idx, direction) {
+    console.log("parseInt(idx, 10)", parseInt(idx, 10));
     if (parseInt(idx, 10)) {
       if(direction === 'vertical') svScrollerSrvc.publish('vertical:scrollToElement', idx);
       if (direction === 'horizontal') svScrollerSrvc.publish('horizontal:scrollToElement', idx);

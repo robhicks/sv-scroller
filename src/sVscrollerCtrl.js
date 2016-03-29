@@ -72,6 +72,8 @@ export default function svScrollerCtrl($scope, $element, $attrs, $transclude, $i
     if ($element.children().length === 0) $element.append(ctrl.$container);
     ctrl.$container.unbind('scroll');
     ctrl.$container.bind('scroll', onScrollHandler);
+    ctrl.$container.unbind('resize');
+    ctrl.$container.bind('resize', reset);
     renderChunk(ctrl.$container, 0);
     svScrollerSrvc.subscribe(ctrl.namespace + 'scrollToElement', scrollToElement);
     svScrollerSrvc.subscribe(ctrl.namespace + 'scrollToView', scrollToView);
@@ -154,29 +156,21 @@ export default function svScrollerCtrl($scope, $element, $attrs, $transclude, $i
   }
 
   function scrollToElement(index) {
-    index = parseInt(index, 10);
-    console.log("index", index);
-    if (index) {
-      if (ctrl.mode === 'grid') {
-
-      } else {
+    index = parseInt(index, 10) || 0;
+    switch(ctrl.mode) {
+      case "grid":
+        renderChunk(ctrl.$container, (Math.ceil(index / ctrl.totalCols) - 1) * ctrl.totalCols);
+        ctrl.$container[0].scrollTop = (Math.ceil(index / ctrl.totalCols) - 1) * ctrl.itemHeight;
+        break;
+      case "horizontal":
         renderChunk(ctrl.$container, index);
-        if (ctrl.mode === 'horizontal') ctrl.$container[0].scrollLeft = index * ctrl.itemWidth;
-        else if (ctrl.mode === 'grid') ctrl.$container[0].scrollTop = Math.ceil(index * ctrl.itemHeight / ctrl.totalCols);
-        else ctrl.$container[0].scrollTop = index * ctrl.itemHeight;
-      }
-
-      // if (index < ctrl.screenItemsLen) {
-      //   renderChunk(ctrl.$container, 0);
-      //   if (ctrl.mode === 'horizontal') ctrl.$container[0].scrollLeft = 0;
-      //   else ctrl.$container[0].scrollTop = 0;
-      // } else {
-      //   renderChunk(ctrl.$container, index);
-      //   if (ctrl.mode === 'horizontal') ctrl.$container[0].scrollLeft = index * ctrl.itemWidth;
-      //   else if (ctrl.mode === 'grid') ctrl.$container[0].scrollTop = Math.ceil(index * ctrl.itemHeight / ctrl.totalCols);
-      //   else ctrl.$container[0].scrollTop = index * ctrl.itemHeight;
-      // }
+        ctrl.$container[0].scrollLeft = index * ctrl.itemWidth;
+        break;
+      default:
+        renderChunk(ctrl.$container, index);
+        ctrl.$container[0].scrollTop = index * ctrl.itemHeight;
     }
+
   }
 
   function scrollToView(token) {

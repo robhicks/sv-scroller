@@ -62,3 +62,6 @@ Still, I wanted the library to be able to react to certain things, like being re
 The project uses gulp 4. The default task builds a minified and un-minified version of the library using [browserify](http://browserify.org/) and [Babel](https://babeljs.io/) v.6.
 
 I use [indexzero's http-server](https://github.com/indexzero/http-server) for development testing.
+
+# TODO
+- add resizing listener/handler - don't trigger digest
