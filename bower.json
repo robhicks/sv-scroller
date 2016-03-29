@@ -1,0 +1,34 @@
+{
+  "name": "s-vscroller",
+  "description": "Angular 1.x virtual scroller",
+  "main": "dist",
+  "version": "0.1.0",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "angular",
+    "1.x",
+    "sv-scroll",
+    "virtual",
+    "scroll",
+    "ui-scroll",
+    "vs-repeat",
+    "ux-datagrid",
+    "a-grid"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "components/",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+
+  },
+  "dependencies": {
+  }
+}

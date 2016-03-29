@@ -1,0 +1,50 @@
+.s-container {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ccc;
+}
+
+.s-vrow {
+  width: 100%;
+  height: 30px;
+  max-height: 30px;
+  border-bottom: solid 1px #dbd9d9;
+  color: #000;
+  margin: 0;
+}
+
+.s-vcol {
+  width: 30px;
+  max-height: 30px;
+  border-right: solid 1px #dbd9d9;
+  color: #000;
+  margin: 0;
+}
+
+.vertical-panel {
+  height: 200px;
+  width: 600px;
+  background-color: yellow;
+  position: relative;
+  margin-top: 1em;
+  margin-left: 1em;
+}
+
+.horizontal-panel {
+  width: 600px;
+  background-color: yellow;
+  height: 100px;
+  position: relative;
+  margin-top: 1em;
+  margin-left: 1em;
+}
+
+.grid-panel {
+  width: 600px;
+  height: 300px;
+  background-color: yellow;
+  position: relative;
+  margin-top: 1em;
+  margin-left: 1em;
+}

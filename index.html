@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="node_modules/purecss/build/pure-min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="assets/styles.css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body ng-app="App" ng-controller="MainCtrl as MC">
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div class="horizontal-panel">
+          <s-vscroller id="horizontal" iterator="'item'" collection="MC.items" item-width="100" h="100" mode="'horizontal'">
+            <div>{{item.id}}</div>
+          </s-vscroller>
+        </div>
+        <input type="text" name="name" ng-model="MC.scrollToHorizontal"/>
+        <button type="button" name="button" ng-click="MC.scrollToElement(MC.scrollToHorizontal, 'horizontal')">Scroll To</button>
+        <br/>
+        <button type="button" name="button" ng-click="MC.horizontalView('left')">Left</button>
+        <button type="button" name="button" ng-click="MC.horizontalView('right')">Right</button>
+        <button type="button" name="button" ng-click="MC.horizontalView('beginning')">Beginning</button>
+        <button type="button" name="button" ng-click="MC.horizontalView('end')">End</button>
+      </div>
+    </div>
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div class="vertical-panel">
+          <s-vscroller id="vertical" class="container" iterator="'item'" collection="MC.items" item-height="30" mode="'vertical'">
+            <div>{{item.id}}</div>
+          </s-vscroller>
+        </div>
+        <input type="text" name="name" ng-model="MC.scrollToVertical"/>
+        <button type="button" name="button" ng-click="MC.scrollToElement(MC.scrollToVertical, 'vertical')">Scroll To</button>
+        <br/>
+        <button type="button" name="button" ng-click="MC.verticalView('up')">Up</button>
+        <button type="button" name="button" ng-click="MC.verticalView('down')">Down</button>
+        <button type="button" name="button" ng-click="MC.verticalView('top')">Beginning</button>
+        <button type="button" name="button" ng-click="MC.verticalView('bottom')">End</button>
+      </div>
+    </div>
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div class="grid-panel">
+          <s-vscroller id="grid" iterator="'item'" collection="MC.items" item-height="64" item-width="64" mode="'grid'">
+            <div>{{item.id}}</div>
+          </s-vscroller>
+        </div>
+        <input type="text" name="name" ng-model="MC.scrollToGrid">
+        <button type="button" name="button" ng-click="MC.scrollToElement(MC.scrollToGrid, 'grid')">Scroll To</button>
+        <br/>
+        <button type="button" name="button" ng-click="MC.gridView('up')">Up</button>
+        <button type="button" name="button" ng-click="MC.gridView('down')">Down</button>
+        <button type="button" name="button" ng-click="MC.gridView('top')">Beginning</button>
+        <button type="button" name="button" ng-click="MC.gridView('bottom')">End</button>
+        <button type="button" name="button" ng-click="MC.resizeGrid(96)">Large</button>
+        <button type="button" name="button" ng-click="MC.resizeGrid(64)">Medium</button>
+        <button type="button" name="button" ng-click="MC.resizeGrid(48)">Small</button>
+      </div>
+    </div>
+    <script src="node_modules/angular/angular.js" charset="utf-8"></script>
+    <script src="./assets/app.js" charset="utf-8"></script>
+    <script src="./dist/sv-scroller.js" charset="utf-8"></script>
+  </body>
+</html>
