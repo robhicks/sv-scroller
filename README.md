@@ -1,4 +1,4 @@
-# sv-scroller
+# SV-SCROLLER
 Yet another Angular 1.x virtual scroller
 
 # Why?
@@ -19,9 +19,9 @@ Angular 1.4x or 1.5x.
 The library is not fancy. It is centered around a single Angular 1.x element directive. The html for the directive looks like this:
 
 ```Javascript
-<s-vscroller id="vertical" iterator="'item'" collection="MC.items" item-height="30" mode="'vertical'">
+<sv-scroller id="vertical" iterator="'item'" collection="MC.items" item-height="30" mode="'vertical'">
   <div>{{item.id}}</div>
-</s-vscroller>
+</sv-scroller>
 ```
 
 The containing element must have a fixed size. The library does not yet support resize events.
@@ -40,25 +40,25 @@ Directive attributes include:
 A horizontal directive might look like this:
 
 ```Javascript
-<s-vscroller id="horizontal" iterator="'item'" collection="MC.items" item-width="100" h="100" mode="'horizontal'">
+<sv-scroller id="horizontal" iterator="'item'" collection="MC.items" item-width="100" h="100" mode="'horizontal'">
   <div>{{item.id}}</div>
-</s-vscroller>
+</sv-scroller>
 ```
 
 And a grid directive might look like this:
 
 ```Javascript
-<s-vscroller id="grid" iterator="'item'" collection="MC.items" item-height="64" item-width="64" mode="'grid'">
+<sv-scroller id="grid" iterator="'item'" collection="MC.items" item-height="64" item-width="64" mode="'grid'">
   <div>{{item.id}}</div>
-</s-vscroller>
+</sv-scroller>
 ```
 
 I don't like Angular watchers or listeners so the library only supports one. It watches the collection and reinitializes when it changes.
 
-Still, I wanted the library to be able to react to certain things, like being requested to go to the beginning, end or some point in the grid. For examples to see how to do so, look at the index.html file.
+Still, I wanted the library to be able to react to certain things, like being requested to go to the beginning, end or some point in the grid, or to load additional members of the collection. For examples to see how to do so, look at the index.html file.
 
 # Development
 
-The project uses gulp 4. The default task builds a minified and un-minified version of the library using [browserify](http://browserify.org/) and [Babel](https://babeljs.io/) v.6. 
+The project uses gulp 4. The default task builds a minified and un-minified version of the library using [browserify](http://browserify.org/) and [Babel](https://babeljs.io/) v.6.
 
 I use [indexzero's http-server](https://github.com/indexzero/http-server) for development testing.

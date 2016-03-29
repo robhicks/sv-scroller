@@ -10,9 +10,9 @@
     <div class="pure-g">
       <div class="pure-u-1-2">
         <div class="horizontal-panel">
-          <s-vscroller id="horizontal" iterator="'item'" collection="MC.items" item-width="100" h="100" mode="'horizontal'">
+          <sv-scroller id="horizontal" iterator="'item'" collection="MC.items" item-width="100" h="100" mode="'horizontal'">
             <div>{{item.id}}</div>
-          </s-vscroller>
+          </sv-scroller>
         </div>
         <input type="text" name="name" ng-model="MC.scrollToHorizontal"/>
         <button type="button" name="button" ng-click="MC.scrollToElement(MC.scrollToHorizontal, 'horizontal')">Scroll To</button>
@@ -26,9 +26,9 @@
     <div class="pure-g">
       <div class="pure-u-1-2">
         <div class="vertical-panel">
-          <s-vscroller id="vertical" class="container" iterator="'item'" collection="MC.items" item-height="30" mode="'vertical'">
+          <sv-scroller id="vertical" class="container" iterator="'item'" collection="MC.items" item-height="30" mode="'vertical'">
             <div>{{item.id}}</div>
-          </s-vscroller>
+          </sv-scroller>
         </div>
         <input type="text" name="name" ng-model="MC.scrollToVertical"/>
         <button type="button" name="button" ng-click="MC.scrollToElement(MC.scrollToVertical, 'vertical')">Scroll To</button>
@@ -42,9 +42,9 @@
     <div class="pure-g">
       <div class="pure-u-1-2">
         <div class="grid-panel">
-          <s-vscroller id="grid" iterator="'item'" collection="MC.items" item-height="64" item-width="64" mode="'grid'">
+          <sv-scroller id="grid" iterator="'item'" collection="MC.items" item-height="64" item-width="64" mode="'grid'">
             <div>{{item.id}}</div>
-          </s-vscroller>
+          </sv-scroller>
         </div>
         <input type="text" name="name" ng-model="MC.scrollToGrid">
         <button type="button" name="button" ng-click="MC.scrollToElement(MC.scrollToGrid, 'grid')">Scroll To</button>

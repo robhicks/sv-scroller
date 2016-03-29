@@ -3,7 +3,7 @@ import {error} from './utils';
 import scroller from './scroller';
 const REMOVE_INTERVAL = 300;
 
-export default function sVscrollerCtrl($scope, $element, $attrs, $transclude, $interval, $timeout, sVscrollerSrvc) {
+export default function svScrollerCtrl($scope, $element, $attrs, $transclude, $interval, $timeout, svScrollerSrvc) {
   let ctrl = {};
   ctrl.config = new Config();
   ctrl.namespace = $attrs.id ? $attrs.id + ':' : '';
@@ -73,9 +73,9 @@ export default function sVscrollerCtrl($scope, $element, $attrs, $transclude, $i
     ctrl.$container.unbind('scroll');
     ctrl.$container.bind('scroll', onScrollHandler);
     renderChunk(ctrl.$container, 0);
-    sVscrollerSrvc.subscribe(ctrl.namespace + 'scrollToElement', scrollToElement);
-    sVscrollerSrvc.subscribe(ctrl.namespace + 'scrollToView', scrollToView);
-    sVscrollerSrvc.subscribe(ctrl.namespace + 'reset', reset);
+    svScrollerSrvc.subscribe(ctrl.namespace + 'scrollToElement', scrollToElement);
+    svScrollerSrvc.subscribe(ctrl.namespace + 'scrollToView', scrollToView);
+    svScrollerSrvc.subscribe(ctrl.namespace + 'reset', reset);
     $interval(() => {
       if (Date.now() - ctrl.lastScrolled > 200) {
         let $badNodes = angular.element(document.querySelectorAll('[data-rm-node="' + ctrl.badNodeMarker + '"]'));
@@ -217,12 +217,12 @@ export default function sVscrollerCtrl($scope, $element, $attrs, $transclude, $i
 
 }
 
-sVscrollerCtrl.$inject = [
+svScrollerCtrl.$inject = [
   '$scope',
   '$element',
   '$attrs',
   '$transclude',
   '$interval',
   '$timeout',
-  'sVscrollerSrvc'
+  'svScrollerSrvc'
 ];

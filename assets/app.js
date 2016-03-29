@@ -1,5 +1,5 @@
 angular.module('App', ['sv-scroller'])
-.controller('MainCtrl', ['sVscrollerSrvc', '$timeout', function(sVscrollerSrvc, $timeout) {
+.controller('MainCtrl', ['svScrollerSrvc', '$timeout', function(svScrollerSrvc, $timeout) {
   let iterations = 500;
   let injectedIterations = 5000;
   this.items = [];
@@ -14,22 +14,22 @@ angular.module('App', ['sv-scroller'])
 
   this.scrollToElement = function(idx, direction) {
     if (parseInt(idx, 10)) {
-      if(direction === 'vertical') sVscrollerSrvc.publish('vertical:scrollToElement', idx);
-      if (direction === 'horizontal') sVscrollerSrvc.publish('horizontal:scrollToElement', idx);
-      if (direction === 'grid') sVscrollerSrvc.publish('grid:scrollToElement', idx);
+      if(direction === 'vertical') svScrollerSrvc.publish('vertical:scrollToElement', idx);
+      if (direction === 'horizontal') svScrollerSrvc.publish('horizontal:scrollToElement', idx);
+      if (direction === 'grid') svScrollerSrvc.publish('grid:scrollToElement', idx);
     }
   }
 
   this.horizontalView = function(token) {
-    sVscrollerSrvc.publish('horizontal:scrollToView', token);
+    svScrollerSrvc.publish('horizontal:scrollToView', token);
   }
 
   this.verticalView = function(token) {
-    sVscrollerSrvc.publish('vertical:scrollToView', token);
+    svScrollerSrvc.publish('vertical:scrollToView', token);
   }
 
   this.gridView = function(token) {
-    sVscrollerSrvc.publish('grid:scrollToView', token);
+    svScrollerSrvc.publish('grid:scrollToView', token);
   }
 
   this.getMore = () => {
@@ -43,7 +43,7 @@ angular.module('App', ['sv-scroller'])
   }
 
   this.resizeGrid = function(size) {
-    sVscrollerSrvc.publish('grid:reset', {itemHeight: size, itemWidth: size});
+    svScrollerSrvc.publish('grid:reset', {itemHeight: size, itemWidth: size});
   }
 
   $timeout(() => {

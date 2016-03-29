@@ -1,7 +1,7 @@
-export default class sVscroller {
+export default class svScroller {
   constructor() {
     this.restrict = 'E';
-    this.controller = 'sVscrollerCtrl as svc';
+    this.controller = 'svScrollerCtrl as svc';
     this.bindToController = {
       iterator: '<',
       collection: '=',
@@ -18,10 +18,10 @@ export default class sVscroller {
   }
 
   static factory() {
-    sVscroller.instance = new sVscroller();
-    return sVscroller.instance;
+    svScroller.instance = new svScroller();
+    return svScroller.instance;
   }
 
 }
 
-sVscroller.factory.$inject = [];
+svScroller.factory.$inject = [];
