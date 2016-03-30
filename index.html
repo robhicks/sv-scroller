@@ -14,13 +14,15 @@
             <div>{{item.id}}</div>
           </sv-scroller>
         </div>
-        <input type="text" name="name" ng-model="MC.scrollToHorizontal"/>
-        <button type="button" name="button" ng-click="MC.scrollToElement(MC.scrollToHorizontal, 'horizontal')">Scroll To</button>
-        <br/>
-        <button type="button" name="button" ng-click="MC.horizontalView('left')">Left</button>
-        <button type="button" name="button" ng-click="MC.horizontalView('right')">Right</button>
-        <button type="button" name="button" ng-click="MC.horizontalView('beginning')">Beginning</button>
-        <button type="button" name="button" ng-click="MC.horizontalView('end')">End</button>
+        <div class="buttons">
+          <input type="text" name="name" ng-model="MC.scrollToHorizontal"/>
+          <button type="button" name="button" ng-click="MC.scrollToElement(MC.scrollToHorizontal, 'horizontal')">Scroll To</button>
+          <br/>
+          <button type="button" name="button" ng-click="MC.horizontalView('left')">Left</button>
+          <button type="button" name="button" ng-click="MC.horizontalView('right')">Right</button>
+          <button type="button" name="button" ng-click="MC.horizontalView('beginning')">Beginning</button>
+          <button type="button" name="button" ng-click="MC.horizontalView('end')">End</button>
+        </div>
       </div>
     </div>
     <div class="pure-g">
@@ -30,13 +32,15 @@
             <div>{{item.id}}</div>
           </sv-scroller>
         </div>
-        <input type="text" name="name" ng-model="MC.scrollToVertical"/>
-        <button type="button" name="button" ng-click="MC.scrollToElement(MC.scrollToVertical, 'vertical')">Scroll To</button>
-        <br/>
-        <button type="button" name="button" ng-click="MC.verticalView('up')">Up</button>
-        <button type="button" name="button" ng-click="MC.verticalView('down')">Down</button>
-        <button type="button" name="button" ng-click="MC.verticalView('top')">Beginning</button>
-        <button type="button" name="button" ng-click="MC.verticalView('bottom')">End</button>
+        <div class="buttons">
+          <input type="text" name="name" ng-model="MC.scrollToVertical"/>
+          <button type="button" name="button" ng-click="MC.scrollToElement(MC.scrollToVertical, 'vertical')">Scroll To</button>
+          <br/>
+          <button type="button" name="button" ng-click="MC.verticalView('up')">Up</button>
+          <button type="button" name="button" ng-click="MC.verticalView('down')">Down</button>
+          <button type="button" name="button" ng-click="MC.verticalView('top')">Beginning</button>
+          <button type="button" name="button" ng-click="MC.verticalView('bottom')">End</button>
+        </div>
       </div>
     </div>
     <div class="pure-g">
@@ -46,16 +50,17 @@
             <div>{{item.id}}</div>
           </sv-scroller>
         </div>
-        <input type="text" name="name" ng-model="MC.scrollToGrid">
-        <button type="button" name="button" ng-click="MC.scrollToElement(MC.scrollToGrid, 'grid')">Scroll To</button>
-        <br/>
-        <button type="button" name="button" ng-click="MC.gridView('up')">Up</button>
-        <button type="button" name="button" ng-click="MC.gridView('down')">Down</button>
-        <button type="button" name="button" ng-click="MC.gridView('top')">Beginning</button>
-        <button type="button" name="button" ng-click="MC.gridView('bottom')">End</button>
-        <button type="button" name="button" ng-click="MC.resizeGrid(96)">Large</button>
-        <button type="button" name="button" ng-click="MC.resizeGrid(64)">Medium</button>
-        <button type="button" name="button" ng-click="MC.resizeGrid(48)">Small</button>
+        <div class="buttons">
+          <input type="text" name="name" ng-model="MC.scrollToGrid">
+          <button type="button" name="button" ng-click="MC.scrollToElement(MC.scrollToGrid, 'grid')">Scroll To</button>
+          <input type="text" name="name" ng-model="MC.gridSize">
+          <button type="button" name="button" ng-click="MC.changeGridSize(MC.gridSize)">Resize Grid</button>
+          <br/>
+          <button type="button" name="button" ng-click="MC.gridView('up')">Up</button>
+          <button type="button" name="button" ng-click="MC.gridView('down')">Down</button>
+          <button type="button" name="button" ng-click="MC.gridView('top')">Beginning</button>
+          <button type="button" name="button" ng-click="MC.gridView('bottom')">End</button>
+        </div>
       </div>
     </div>
     <script src="node_modules/angular/angular.js" charset="utf-8"></script>

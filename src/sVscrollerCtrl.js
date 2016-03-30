@@ -131,7 +131,6 @@ export default function svScrollerCtrl($scope, $element, $attrs, $transclude, $i
     let $fragment = angular.element(document.createDocumentFragment());
     for (var i = from; i < finalItem; i++) {
       promises.push(createElement(i));
-      // $fragment.append(createElement(i));
     }
 
     // Hide and mark obsolete nodes for deletion.
@@ -153,6 +152,7 @@ export default function svScrollerCtrl($scope, $element, $attrs, $transclude, $i
 
   function reset(config) {
     initialize(config);
+    scrollToElement(0);
   }
 
   function scrollToElement(index) {

@@ -52,3 +52,11 @@
   margin-top: 1em;
   margin-left: 1em;
 }
+
+.buttons {
+  margin-left: 1em;
+}
+
+.buttons input {
+  width: 64px;
+}

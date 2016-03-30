@@ -43,7 +43,7 @@ angular.module('App', ['sv-scroller'])
     }, 1000);
   }
 
-  this.resizeGrid = function(size) {
+  this.changeGridSize = function(size) {
     svScrollerSrvc.publish('grid:reset', {itemHeight: size, itemWidth: size});
   }
 
