@@ -2,7 +2,7 @@ import Config from './Config';
 import {error} from './utils';
 import scroller from './scroller';
 const REMOVE_INTERVAL = 300;
-const VISIBILITY_TIME = 50;
+const VISIBILITY_TIME = 1;
 const REPAINT_WAIT = 200;
 
 export default function svScrollerCtrl($scope, $element, $attrs, $transclude, $interval, $timeout, svScrollerSrvc) {
@@ -110,7 +110,7 @@ export default function svScrollerCtrl($scope, $element, $attrs, $transclude, $i
         break;
       case 'grid':
         scrollTop = target.scrollTop;
-        // console.log("scrollTop", scrollTop, ' ctrl.lastRepaintY', ctrl.lastRepaintY, ' ctrl.maxBuffer ', ctrl.maxBuffer);
+        console.log("scrollTop", scrollTop, ' ctrl.lastRepaintY', ctrl.lastRepaintY, ' ctrl.maxBuffer ', ctrl.maxBuffer);
         if ((Math.abs(scrollTop - ctrl.lastRepaintY) > ctrl.maxBuffer) || scrollTop === 0) {
           first = parseInt(scrollTop / ctrl.itemHeight * ctrl.totalCols) - ctrl.screenItemsLen;
           // console.log("first", first, "screenItemsLen ", ctrl.screenItemsLen);
