@@ -102,7 +102,7 @@ export default function svScrollerCtrl($scope, $element, $attrs, $transclude, $i
     switch(ctrl.mode) {
       case 'horizontal':
         scrollLeft = target.scrollLeft;
-        if ((Math.abs(scrollLeft - ctrl.lastRepaintX) > ctrl.maxBuffer) || scrollLeft === 0) {
+        if ((Math.abs(scrollLeft - ctrl.lastRepaintX) > ctrl.maxBuffer)) {
           first = parseInt(scrollLeft / ctrl.itemWidth) - ctrl.screenItemsLen;
           renderChunk(ctrl.$container, first < 0 ? 0 : first);
           ctrl.lastRepaintX = scrollLeft;
@@ -110,8 +110,8 @@ export default function svScrollerCtrl($scope, $element, $attrs, $transclude, $i
         break;
       case 'grid':
         scrollTop = target.scrollTop;
-        console.log("scrollTop", scrollTop, ' ctrl.lastRepaintY', ctrl.lastRepaintY, ' ctrl.maxBuffer ', ctrl.maxBuffer);
-        if ((Math.abs(scrollTop - ctrl.lastRepaintY) > ctrl.maxBuffer) || scrollTop === 0) {
+        // console.log("scrollTop", scrollTop, ' ctrl.lastRepaintY', ctrl.lastRepaintY, ' ctrl.maxBuffer ', ctrl.maxBuffer);
+        if ((Math.abs(scrollTop - ctrl.lastRepaintY) > ctrl.maxBuffer)) {
           first = parseInt(scrollTop / ctrl.itemHeight * ctrl.totalCols) - ctrl.screenItemsLen;
           // console.log("first", first, "screenItemsLen ", ctrl.screenItemsLen);
           renderChunk(ctrl.$container, first < 0 ? 0 : first);
@@ -120,7 +120,7 @@ export default function svScrollerCtrl($scope, $element, $attrs, $transclude, $i
         break;
       default:
         scrollTop = target.scrollTop;
-        if ((Math.abs(scrollTop - ctrl.lastRepaintY) > ctrl.maxBuffer) || scrollTop === 0) {
+        if ((Math.abs(scrollTop - ctrl.lastRepaintY) > ctrl.maxBuffer)) {
           first = parseInt(scrollTop / ctrl.itemHeight) - ctrl.screenItemsLen;
           renderChunk(ctrl.$container, first < 0 ? 0 : first);
           ctrl.lastRepaintY = scrollTop;

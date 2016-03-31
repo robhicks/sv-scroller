@@ -1,6 +1,6 @@
 {
   "name": "sv-scroller",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Angular 1.x virtual scroller",
   "main": "index.js",
   "scripts": {
