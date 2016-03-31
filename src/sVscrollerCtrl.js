@@ -2,33 +2,31 @@ import Config from './Config';
 import {error} from './utils';
 import scroller from './scroller';
 const REMOVE_INTERVAL = 300;
+const VISIBILITY_TIME = 50;
+const REPAINT_WAIT = 200;
 
 export default function svScrollerCtrl($scope, $element, $attrs, $transclude, $interval, $timeout, svScrollerSrvc) {
-  let ctrl = {};
+  let ctrl = this;
   ctrl.config = new Config();
   ctrl.namespace = $attrs.id ? $attrs.id + ':' : '';
   ctrl.infiniteScroll = this.infiniteScroll;
 
-  $timeout(() => {
-    let parent = $element.parent()[0].getBoundingClientRect();
-    this.parentDims = {
-      height: parent.height,
-      width: parent.width
-    };
-
-    initialize(this);
-  }, 200)
-
+  initialize(ctrl);
 
   $scope.$watchCollection(() => {
     return this.collection;
   }, (n, o) => {
     if (n !== o) {
       ctrl.collection = this.collection;
-      initialize(this);
+      initialize(ctrl);
       onScrollHandler();
     }
   })
+
+  svScrollerSrvc.subscribe(ctrl.namespace + 'scrollToElement', scrollToElement);
+  svScrollerSrvc.subscribe(ctrl.namespace + 'scrollToView', scrollToView);
+  svScrollerSrvc.subscribe(ctrl.namespace + 'reset', reset);
+  svScrollerSrvc.subscribe(ctrl.namespace + 'isReady', isReady);
 
   function createElement(i) {
     let $item = angular.element('<div></div>');
@@ -36,7 +34,8 @@ export default function svScrollerCtrl($scope, $element, $attrs, $transclude, $i
       height: ctrl.itemHeight + 'px',
       width: '100%',
       position: 'absolute',
-      top: (i * ctrl.itemHeight) + 'px'
+      top: (i * ctrl.itemHeight) + 'px',
+      visibility: 'hidden'
     }
     if (ctrl.mode === 'horizontal') {
       css.height = '100%';
@@ -55,7 +54,6 @@ export default function svScrollerCtrl($scope, $element, $attrs, $transclude, $i
       css.width = ctrl.itemWidth + 'px';
       css['min-height'] = ctrl.itemHeight + 'px';
     }
-
     $item.css(css);
     $item.addClass(ctrl.mode === 'horizontal' ? 's-vcol' : 's-vrow');
     if (ctrl.mode === 'grid') $item.addClass('s-vcol');
@@ -63,23 +61,34 @@ export default function svScrollerCtrl($scope, $element, $attrs, $transclude, $i
       scope[ctrl.iterator] = ctrl.collection[i];
       $item.append(el);
     });
-    // setTimeout(() => {$item.css({visibility: 'visible'})}, 10);
+    setTimeout(() => {$item.css({visibility: 'visible'})}, VISIBILITY_TIME);
     return Promise.resolve($item);
   }
 
-  function initialize(config) {
-    Object.assign(ctrl, ctrl.config.initialize(config));
+  function initialize(config = {}) {
+    let parent = $element.parent()[0].getBoundingClientRect();
+    ctrl.parentDims = {
+      height: parent.height,
+      width: parent.width
+    };
+    Object.assign(ctrl, config);
+    Object.assign(ctrl, ctrl.config.initialize(ctrl));
+    // console.log("ctrl", ctrl);
     if ($element.children().length === 0) $element.append(ctrl.$container);
-    ctrl.$container.unbind('scroll');
-    ctrl.$container.bind('scroll', onScrollHandler);
-    ctrl.$container.unbind('resize');
-    ctrl.$container.bind('resize', reset);
-    renderChunk(ctrl.$container, 0);
-    svScrollerSrvc.subscribe(ctrl.namespace + 'scrollToElement', scrollToElement);
-    svScrollerSrvc.subscribe(ctrl.namespace + 'scrollToView', scrollToView);
-    svScrollerSrvc.subscribe(ctrl.namespace + 'reset', reset);
+    // console.log("ctrl.$container", ctrl.$container);
+    ctrl.$container
+      .unbind('scroll')
+      .unbind('resize')
+      .bind('scroll', onScrollHandler)
+      .bind('resize', reset);
+    // console.log("ctrl.$container", ctrl.$container);
+    renderChunk(ctrl.$container, 0).then(mode => {
+      // console.log('initialze', ctrl.namespace + 'ready');
+      svScrollerSrvc.publish(ctrl.namespace + 'ready', true);
+    });
+
     $interval(() => {
-      if (Date.now() - ctrl.lastScrolled > 200) {
+      if (Date.now() - ctrl.lastScrolled > REPAINT_WAIT) {
         let $badNodes = angular.element(document.querySelectorAll('[data-rm-node="' + ctrl.badNodeMarker + '"]'));
         $badNodes.remove();
       }
@@ -141,11 +150,13 @@ export default function svScrollerCtrl($scope, $element, $attrs, $transclude, $i
       child.setAttribute('data-rm-node', ctrl.badNodeMarker);
     }
 
-    Promise.all(promises).then(results => {
+    return Promise.all(promises).then(results => {
       results.forEach(result => {
         $fragment.append(result);
       });
+      // console.log("$fragment", $fragment);
       $node.append($fragment);
+      return ctrl.mode;
     });
 
   }
@@ -155,8 +166,14 @@ export default function svScrollerCtrl($scope, $element, $attrs, $transclude, $i
     scrollToElement(0);
   }
 
+  function isReady() {
+    // console.log('isReady: ', Boolean(ctrl.$container.children().length > 1));
+    svScrollerSrvc.publish(ctrl.namespace + 'ready', Boolean(ctrl.$container.children().length > 1));
+  }
+
   function scrollToElement(index) {
     index = parseInt(index, 10) || 0;
+    // console.log('scrollToElement', index);
     switch(ctrl.mode) {
       case "grid":
         renderChunk(ctrl.$container, (Math.ceil(index / ctrl.totalCols) - 1) * ctrl.totalCols);

@@ -47,9 +47,16 @@ angular.module('App', ['sv-scroller'])
     svScrollerSrvc.publish('grid:reset', {itemHeight: size, itemWidth: size});
   }
 
+  svScrollerSrvc.subscribe('grid:ready', function() {
+    console.log("grid:ready");
+  });
+
   $timeout(() => {
     console.log("resetting");
     this.items = this.injectedItems;
+    // svScrollerSrvc.publish('vertical:reset', {collection: this.items});
+    // svScrollerSrvc.publish('horizontal:reset', {collection: this.items});
+    // svScrollerSrvc.publish('grid:reset', {collection: this.items});
   }, 1000);
 
 }])
